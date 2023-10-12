@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1 id="carrera"></h1>
+
+    <script>
+
+        var i = 0;
+        var j = 0;
+
+        // aqui quiero colocar una funcion que me diga cual es el piloto con el menor tiempo para ordenarlos por posicion de carrera (HECHO !!!!!!!!!)
+
+        function encontrarTiempoMenor(tiempoPiloto1, tiempoPiloto2, tiempoPiloto3, tiempoPiloto4, tiempoPiloto5) {
+
+            let tiempoMenor = tiempoPiloto1;
+            let tiempoPiloto = [tiempoPiloto1, tiempoPiloto2, tiempoPiloto3, tiempoPiloto4, tiempoPiloto5];
+
+            for (i = 0; i <= tiempoPiloto.length; i++) {
+
+                if (tiempoPiloto[i] <= tiempoMenor) {
+
+                    tiempoMenor = tiempoPiloto[i];
+                }
+            }
+            return tiempoMenor;
+        }
+
+
+
+
+
+
+
+
+
+
+        // aqui debes colocar un prompt para que el usuario meta el nombre, el numero de kart y el tiempo que le llevo la carrera
+
+        // nombre, numKart, tiempo
+        var piloto1 = ["Luis", 8, 43.30];
+        var piloto2 = ["Cristina", 12, 45.70];
+        var piloto3 = ["Paloma", 3, 46.02];
+        var piloto4 = ["Yago", 1, 50.06];
+        var piloto5 = ["Juan", 7, 50.10];
+
+
+        // aqui tiene que ir un for verificando cual es el tiempo de los pilotos, para colocarlos en la posicion que quedaron en la carrera
+        for (i = 0; i <= 5; i++) {
+
+
+
+
+
+        }
+
+        var carrera = [[piloto1[0], piloto1[1], piloto1[2]], [piloto2[0], piloto2[1], piloto2[2]], [piloto3[0], piloto3[1], piloto3[2]], [piloto4[0], piloto4[1], piloto4[2]], [piloto5[0], piloto5[1], piloto5[2]]];
+
+
+        for (i = 0; i < carrera.length; i++) {
+
+            document.getElementById("carrera").innerHTML += "Nº" + (i + 1) + " -> ";
+
+            for (let j = 0; j < carrera[i].length; j++) {
+
+
+                document.getElementById("carrera").innerHTML += carrera[i][j] + " ";
+
+
+
+            }
+
+            document.getElementById("carrera").innerHTML += "<br/>";
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
