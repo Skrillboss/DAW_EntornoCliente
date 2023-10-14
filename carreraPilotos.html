@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="piloto.js"></script>
 </head>
 
 <body>
@@ -13,40 +14,32 @@
 
     <script>
 
-        import Piloto from "piloto.js";
-
         var i = 0;
         var j = 0;
-
-
-        // aqui debes colocar un prompt para que el usuario meta el nombre, el numero de kart y el tiempo que le llevo la carrera
-
-        // nombre, numKart, tiempo
-
+        var continuar = "si";
+        var numeroOrdinal = "";
+        var carrera = [];
         var pilotos = [];
 
 
-        while(true){
+        while (continuar == "si") {
 
-            const nombre = prompt("Introduce el nombre del piloto: ");
+            const nombre = prompt("Introduce el nombre del piloto:");
             const numKart = parseInt(prompt("Introduce el numero del Kart que conduce: "));
-            const tiempoCarrera = parseFloat(prompt("Introduce cuento tiempo le llevo llegar a la meta: "));
+            const tiempoCarrera = parseFloat(prompt("Introduce cuantos segundos le llevo llegar a la meta: "));
 
             pilotos.push(new Piloto(nombre, numKart, tiempoCarrera));
 
-            const continuar = prompt("¿Deseas agragar otro piloto? si/no").toLowerCase;
-
-            if(continuar != "si"){
-                break;
-            }
+            continuar = prompt("¿deseas agragar otro piloto? si/no").toLowerCase();
         }
 
+        pilotos.sort((a, b) => a.tiempoCarrera - b.tiempoCarrera);
 
+        for (i = 0; i < pilotos.length; i++) {
 
-        pilotos.sort((a,b) => a[2] - b[2]);
+            carrera.push([pilotos[i].nombre, pilotos[i].numeroKart, pilotos[i].tiempoCarrera]);
+        }
 
-
-        var carrera = [[pilotos[0][0], pilotos[0][1], pilotos[0][2]], [pilotos[1][0], pilotos[1][1], pilotos[1][2]], [pilotos[2][0], pilotos[2][1], pilotos[2][2]], [pilotos[3][0], pilotos[3][1], pilotos[3][2]], [pilotos[4][0], pilotos[4][1], pilotos[4][2]]];
 
 
         for (i = 0; i < carrera.length; i++) {
@@ -55,28 +48,30 @@
 
             for (let j = 0; j < carrera[i].length; j++) {
 
+                switch (j) {
+
+                    case 0:
+                        document.getElementById("carrera").innerHTML += "Piloto: "
+                        break;
+
+                    case 1:
+                        document.getElementById("carrera").innerHTML += "kart Nº"
+                        break;
+
+                    case 2:
+                        document.getElementById("carrera").innerHTML += "Tiempo: "
+                        break;
+
+                    default:
+                }
 
                 document.getElementById("carrera").innerHTML += carrera[i][j] + " ";
-
-
-
             }
 
+            document.getElementById("carrera").innerHTML += "segundos"
+
             document.getElementById("carrera").innerHTML += "<br/>";
-
-
         }
-
-
-
-
-
-
-
-
-
-
-
     </script>
 
 </body>
