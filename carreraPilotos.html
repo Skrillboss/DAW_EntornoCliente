@@ -4,42 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Karts</title>
     <link rel="stylesheet" href="style.css">
     <script src="piloto.js"></script>
 </head>
 
 <body>
 
-    <h1 id="carrera"></h1>
+    <h1 id="puesto"></h1>
+    <h1 id="nombre"></h1>
+    <h1 id="numKart"></h1>
+    <h1 id="tiempo"></h1>
 
     <script>
 
         var i = 0;
         var j = 0;
-        var numeroOrdinal = "";
         var continuar = "si";
         var carrera = [];
         var pilotos = [];
-        var elementoCarrera = document.getElementById("carrera");
+        const elementoPuesto = document.getElementById("puesto");
+        const elementoNombre = document.getElementById("nombre");
+        const elementoNumKart = document.getElementById("numKart");
+        const elementoTiempo = document.getElementById("tiempo");
 
         while (continuar == "si") {
 
-            const nombre = prompt("Introduce el nombre del piloto:").toUpperCase();;
-            const numKart = parseInt(prompt("Introduce el numero del Kart que conduce: "));
-            const tiempoCarrera = parseFloat(prompt("Introduce los segundos le llevo llegar a la meta: "));
+            var nombre = prompt("Introduce el nombre del piloto:").toUpperCase();;
+            var numKart = parseInt(prompt("Introduce el numero del Kart que conduce " + nombre + ": "));
+            var tiempoCarrera = parseFloat(prompt("Introduce los segundos le tomo llegar a la meta: "));
 
-            if (isNaN(numKart) || isNaN(tiempoCarrera)) {
+            while (isNaN(numKart) || isNaN(tiempoCarrera)) {
                 alert("El numero de kart o el tiempo no es correcto, intentalo de nuevo");
-            } else {
+                numKart = parseInt(prompt("Introduce nuevamente el numero del Kart que conduce " + nombre + ": "));
+                tiempoCarrera = parseFloat(prompt("Introduce nuevamente los segundos le llevo llegar a la meta: "));
 
-                pilotos.push(new Piloto(nombre, numKart, tiempoCarrera));
-                do{
-                    continuar = prompt("¿deseas agragar otro piloto? si/no").toLowerCase();
-
-                }while(continuar !== "si" && continuar !== "no");
-                
             }
+
+            pilotos.push(new Piloto(nombre, numKart, tiempoCarrera));
+
+            do {
+                continuar = prompt("¿deseas agragar otro piloto? si/no").toLowerCase();
+
+            } while (continuar !== "si" && continuar !== "no");
+
+
         }
 
         pilotos.sort((a, b) => a.tiempoCarrera - b.tiempoCarrera);
@@ -51,33 +60,29 @@
 
         for (i = 0; i < carrera.length; i++) {
 
-            elementoCarrera.innerHTML += "Nº" + (i + 1) + " -> ";
+            elementoPuesto.innerHTML += "Nº" + (i + 1) + " ->" + "<br/>";
 
             for (let j = 0; j < carrera[i].length; j++) {
 
                 switch (j) {
 
                     case 0:
-                        elementoCarrera.innerHTML += "Piloto: "
+                        elementoNombre.innerHTML += "Piloto: " + carrera[i][0] + "<br/>";
                         break;
 
                     case 1:
-                        elementoCarrera.innerHTML += "kart Nº"
+                        elementoNumKart.innerHTML += "kart Nº" + carrera[i][1] + "<br/>";
                         break;
 
                     case 2:
-                        elementoCarrera.innerHTML += "Tiempo: "
+                        elementoTiempo.innerHTML += "Tiempo: " + carrera[i][2] + "seg<br/>";
                         break;
 
                     default:
                 }
 
-                elementoCarrera.innerHTML += carrera[i][j] + " ";
             }
 
-            elementoCarrera.innerHTML += "segundos"
-
-            elementoCarrera.innerHTML += "<br/>";
         }
     </script>
 
