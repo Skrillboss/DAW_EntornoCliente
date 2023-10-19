@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
     <script src="piloto.js"></script>
 </head>
 
@@ -16,21 +17,29 @@
 
         var i = 0;
         var j = 0;
-        var continuar = "si";
         var numeroOrdinal = "";
+        var continuar = "si";
         var carrera = [];
         var pilotos = [];
-
+        var elementoCarrera = document.getElementById("carrera");
 
         while (continuar == "si") {
 
-            const nombre = prompt("Introduce el nombre del piloto:");
+            const nombre = prompt("Introduce el nombre del piloto:").toUpperCase();;
             const numKart = parseInt(prompt("Introduce el numero del Kart que conduce: "));
-            const tiempoCarrera = parseFloat(prompt("Introduce cuantos segundos le llevo llegar a la meta: "));
+            const tiempoCarrera = parseFloat(prompt("Introduce los segundos le llevo llegar a la meta: "));
 
-            pilotos.push(new Piloto(nombre, numKart, tiempoCarrera));
+            if (isNaN(numKart) || isNaN(tiempoCarrera)) {
+                alert("El numero de kart o el tiempo no es correcto, intentalo de nuevo");
+            } else {
 
-            continuar = prompt("¿deseas agragar otro piloto? si/no").toLowerCase();
+                pilotos.push(new Piloto(nombre, numKart, tiempoCarrera));
+                do{
+                    continuar = prompt("¿deseas agragar otro piloto? si/no").toLowerCase();
+
+                }while(continuar !== "si" && continuar !== "no");
+                
+            }
         }
 
         pilotos.sort((a, b) => a.tiempoCarrera - b.tiempoCarrera);
@@ -40,37 +49,35 @@
             carrera.push([pilotos[i].nombre, pilotos[i].numeroKart, pilotos[i].tiempoCarrera]);
         }
 
-
-
         for (i = 0; i < carrera.length; i++) {
 
-            document.getElementById("carrera").innerHTML += "Nº" + (i + 1) + " -> ";
+            elementoCarrera.innerHTML += "Nº" + (i + 1) + " -> ";
 
             for (let j = 0; j < carrera[i].length; j++) {
 
                 switch (j) {
 
                     case 0:
-                        document.getElementById("carrera").innerHTML += "Piloto: "
+                        elementoCarrera.innerHTML += "Piloto: "
                         break;
 
                     case 1:
-                        document.getElementById("carrera").innerHTML += "kart Nº"
+                        elementoCarrera.innerHTML += "kart Nº"
                         break;
 
                     case 2:
-                        document.getElementById("carrera").innerHTML += "Tiempo: "
+                        elementoCarrera.innerHTML += "Tiempo: "
                         break;
 
                     default:
                 }
 
-                document.getElementById("carrera").innerHTML += carrera[i][j] + " ";
+                elementoCarrera.innerHTML += carrera[i][j] + " ";
             }
 
-            document.getElementById("carrera").innerHTML += "segundos"
+            elementoCarrera.innerHTML += "segundos"
 
-            document.getElementById("carrera").innerHTML += "<br/>";
+            elementoCarrera.innerHTML += "<br/>";
         }
     </script>
 
